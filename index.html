@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kanban Board</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>Kanban Board</h1>
+      <p id="stats" class="stats"></p>
+    </div>
+
+    <div class="tools">
+      <input id="searchInput" type="search" placeholder="Search cards..." aria-label="Search cards">
+      <select id="priorityFilter" aria-label="Filter by priority">
+        <option value="all">All priorities</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+      <button id="addColumnBtn" class="btn" type="button">+ Column</button>
+      <button id="exportBtn" class="btn" type="button">Export</button>
+      <button id="importBtn" class="btn" type="button">Import</button>
+      <input id="importFile" type="file" accept="application/json" hidden>
+      <button id="clearDoneBtn" class="btn" type="button">Clear done</button>
+      <button id="resetBtn" class="btn" type="button">Reset</button>
+      <button id="themeBtn" class="btn" type="button" aria-label="Switch dark or light mode">🌙 Dark</button>
+    </div>
+  </header>
+
+  <main id="board" class="board" aria-label="Kanban board"></main>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <!-- Card add / edit dialog -->
+  <dialog id="cardDialog">
+    <form id="cardForm" novalidate>
+      <h2 id="cardDialogTitle">New card</h2>
+
+      <label for="cardTitle">Title</label>
+      <input id="cardTitle" type="text" maxlength="80" placeholder="What needs to be done?">
+
+      <label for="cardDesc">Description</label>
+      <textarea id="cardDesc" rows="3" maxlength="300" placeholder="Optional details"></textarea>
+
+      <div class="row">
+        <div>
+          <label for="cardPriority">Priority</label>
+          <select id="cardPriority">
+            <option value="high">High</option>
+            <option value="medium" selected>Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
+        <div>
+          <label for="cardDue">Due date</label>
+          <input id="cardDue" type="date">
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="cardLabel">Label</label>
+          <input id="cardLabel" type="text" maxlength="20" placeholder="e.g. Design">
+        </div>
+        <div>
+          <label for="cardColumn">Column</label>
+          <select id="cardColumn"></select>
+        </div>
+      </div>
+
+      <p id="cardError" class="form-error" role="alert" hidden></p>
+
+      <div class="dialog-actions">
+        <button id="cardDeleteBtn" type="button" class="btn danger push-left" hidden>Delete</button>
+        <button id="cardCancelBtn" type="button" class="btn">Cancel</button>
+        <button type="submit" class="btn primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Column add / edit dialog -->
+  <dialog id="columnDialog">
+    <form id="columnForm" novalidate>
+      <h2 id="columnDialogTitle">New column</h2>
+
+      <label for="colName">Column name</label>
+      <input id="colName" type="text" maxlength="30" placeholder="e.g. Testing">
+
+      <label for="colLimit">WIP limit (0 = no limit)</label>
+      <input id="colLimit" type="number" min="0" max="99" value="0">
+
+      <label class="check">
+        <input id="colDone" type="checkbox">
+        Cards in this column count as completed
+      </label>
+
+      <p id="columnError" class="form-error" role="alert" hidden></p>
+
+      <div class="dialog-actions">
+        <button id="columnCancelBtn" type="button" class="btn">Cancel</button>
+        <button type="submit" class="btn primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
