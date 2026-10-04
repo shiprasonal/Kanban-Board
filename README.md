@@ -30,25 +30,18 @@ Kanban-Board/
 └── script.js
 ```
 
-## 🚀 Getting Started
+## Installation
 
-Follow these steps to run the project locally.
-
-**1. Clone the repository**
+Clone the repository using the following command:
 
 ```bash
 git clone https://github.com/shiprasonal/Kanban-Board.git
 ```
 
-**2. Navigate to the project folder**
+Open the cloned project folder and launch `index.html` in your web browser.
 
-```bash
-cd Kanban-Board
-```
+**Repository Link:** [Kanban Board](https://github.com/shiprasonal/Kanban-Board)
 
-**3. Run the application**
-
-Open `index.html` in your preferred web browser.
 
 ## 💡 What I Learned
 
